@@ -12,19 +12,20 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
 
-    - name: Install dependencies
-      run: npm install --save-dev htmlhint stylelint stylelint-config-standard
+      - name: Install dependencies
+        run: npm install --save-dev htmlhint stylelint stylelint-config-standard
 
-   - name: Run HTMLHint
-  run: npx htmlhint "**/*.html" --config .htmlhintrc.json
+      - name: Run HTMLHint
+        run: npx htmlhint "**/*.html" --config .htmlhintrc.json
 
-- name: Run Stylelint
-  run: npx stylelint "**/*.css" --config .stylelintrc.json
+      - name: Run Stylelint
+        run: npx stylelint "**/*.css" --config .stylelintrc.json
+
 
