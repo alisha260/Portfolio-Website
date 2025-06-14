@@ -2,28 +2,29 @@ name: Linting Pipeline
 
 on:
   push:
-    branches:
-      - develop
+    branches: [develop]
   pull_request:
-    branches:
-      - develop
+    branches: [develop]
 
 jobs:
   lint:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20'
 
-      - name: Install dependencies
-        run: npm install --save-dev htmlhint stylelint stylelint-config-standard
+      - name: Install Linting Tools
+        run: |
+          npm install htmlhint stylelint stylelint-config-standard --save-dev
 
       - name: Run HTMLHint
-        run: npx htmlhint "**/*.html" --config .htmlhintrc.json
+        run: npx htmlhint "src/**/*.html"
 
       - name: Run Stylelint
-        run: npx stylelint "styles/**/*.css" --config .stylelintrc.json
+        run: npx stylelint "styles/**/*.css"
